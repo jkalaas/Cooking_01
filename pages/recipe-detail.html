@@ -164,7 +164,11 @@
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-    <!-- JS entry point (ES module) -->
-    <script type="module" src="../js/main.js"></script>
+    <!-- JS: load in dependency order with defer -->
+    <script defer src="../js/components/recipe-data.js"></script>
+    <script defer src="../js/components/recipe-grid.js"></script>
+    <script defer src="../js/components/recipe-detail-view.js"></script>
+    <script defer src="../js/components/add-recipe.js"></script>
+    <script defer src="../js/main.js"></script>
   </body>
 </html>

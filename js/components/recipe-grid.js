@@ -4,13 +4,11 @@
  * Merges built-in recipes with any stored in localStorage.
  */
 
-import { recipes as builtIn } from './recipe-data.js';
-
-export function initRecipeGrid() {
+function initRecipeGrid() {
   const grid = document.getElementById('recipe-grid');
   if (!grid) return;
 
-  const all = [...builtIn, ...getStoredRecipes()];
+  const all = [...recipes, ...getStoredRecipes()];
   grid.innerHTML = all.map(recipeCardHTML).join('');
 }
 

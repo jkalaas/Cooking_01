@@ -8,10 +8,6 @@
  * - Initialises the Add Recipe modal wherever the trigger exists
  */
 
-import { initRecipeGrid }      from './components/recipe-grid.js';
-import { initAddRecipe }       from './components/add-recipe.js';
-import { initRecipeDetail }    from './components/recipe-detail-view.js';
-
 document.addEventListener('DOMContentLoaded', async () => {
   await loadComponent('#site-header', '/components/header.html');
 

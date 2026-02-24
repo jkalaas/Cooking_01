@@ -4,9 +4,7 @@
  * the full detail page.
  */
 
-import { recipes as builtIn } from './recipe-data.js';
-
-export function initRecipeDetail() {
+function initRecipeDetail() {
   const container = document.getElementById('recipe-detail');
   if (!container) return;
 
@@ -25,7 +23,7 @@ export function initRecipeDetail() {
 function findRecipe(id) {
   if (!id) return null;
   const all = [
-    ...builtIn,
+    ...recipes,
     ...JSON.parse(localStorage.getItem('customRecipes') || '[]'),
   ];
   return all.find(r => r.id === id) || null;

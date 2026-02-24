@@ -4,9 +4,7 @@
  * and persisting new recipes to localStorage.
  */
 
-import { initRecipeGrid } from './recipe-grid.js';
-
-export function initAddRecipe() {
+function initAddRecipe() {
   const triggers = document.querySelectorAll('[data-open-modal="add-recipe"]');
   const backdrop = document.getElementById('add-recipe-modal');
   if (!backdrop) return;
