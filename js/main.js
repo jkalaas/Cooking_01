@@ -1,29 +1,70 @@
 /**
- * js/main.js — App entry point
+ * main.js — App entry point
  *
- * Bootstraps the application once the DOM is ready.
- * - Loads shared components (header, footer) into their mount points.
- * - Initialises page-specific modules from js/components/.
+ * - Loads the shared header component
+ * - Initialises the sticky nav scroll effect
+ * - Initialises the recipe grid on the homepage
+ * - Initialises the recipe detail view on the detail page
+ * - Initialises the Add Recipe modal wherever the trigger exists
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-  loadComponent('#site-header', '/components/header.html');
+import { initRecipeGrid }      from './components/recipe-grid.js';
+import { initAddRecipe }       from './components/add-recipe.js';
+import { initRecipeDetail }    from './components/recipe-detail-view.js';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadComponent('#site-header', '/components/header.html');
+
+  initStickyNav();
+  initMobileNav();
+  initHeroBg();
+
+  initRecipeGrid();
+  initRecipeDetail();
+  initAddRecipe();
 });
 
-/**
- * Fetches an HTML snippet and injects it into the given selector.
- * @param {string} selector - CSS selector for the mount element.
- * @param {string} url      - Path to the HTML component file.
- */
+/* ── Component loader ── */
 async function loadComponent(selector, url) {
   const el = document.querySelector(selector);
   if (!el) return;
-
   try {
     const res = await fetch(url);
-    if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
+    if (!res.ok) throw new Error(`${url}: ${res.status}`);
     el.innerHTML = await res.text();
   } catch (err) {
-    console.error(err);
+    console.error('loadComponent:', err);
   }
+}
+
+/* ── Sticky nav ── */
+function initStickyNav() {
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      const nav = document.querySelector('.site-nav');
+      if (nav) nav.classList.toggle('scrolled', !entry.isIntersecting);
+    },
+    { threshold: 0, rootMargin: '-72px 0px 0px 0px' }
+  );
+
+  const sentinel = document.getElementById('nav-sentinel');
+  if (sentinel) observer.observe(sentinel);
+}
+
+/* ── Mobile nav toggle ── */
+function initMobileNav() {
+  document.addEventListener('click', e => {
+    const toggle = e.target.closest('.nav-toggle');
+    if (!toggle) return;
+    const links = document.querySelector('.site-nav__links');
+    links?.classList.toggle('open');
+  });
+}
+
+/* ── Hero parallax bg ── */
+function initHeroBg() {
+  const bg = document.querySelector('.hero__bg');
+  if (!bg) return;
+  /* Trigger the CSS loaded class for the Ken Burns effect */
+  requestAnimationFrame(() => bg.classList.add('loaded'));
 }

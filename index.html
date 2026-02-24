@@ -3,18 +3,220 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cooking_01 – Recipe Website</title>
+    <title>La Marée — The World's Finest Seafood Recipes</title>
+    <meta name="description" content="Discover the most exquisite seafood recipes in the world, curated by Chef Bobba." />
+
+    <!-- Styles -->
     <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/components/nav.css" />
+    <link rel="stylesheet" href="styles/components/hero.css" />
+    <link rel="stylesheet" href="styles/components/recipe-card.css" />
+    <link rel="stylesheet" href="styles/components/about.css" />
+    <link rel="stylesheet" href="styles/components/modal.css" />
   </head>
   <body>
-    <!-- Site header loaded from components/header.html -->
+
+    <!-- Nav sentinel (triggers sticky class) -->
+    <div id="nav-sentinel" style="position:absolute;top:0;height:1px;width:100%;pointer-events:none;"></div>
+
+    <!-- Header injected by JS -->
     <header id="site-header"></header>
 
-    <main id="app">
-      <h1>Welcome to Cooking_01</h1>
-      <p>Discover and share delicious recipes.</p>
-    </main>
+    <!-- ═══════════════════════════════════════ HERO -->
+    <section class="hero" aria-label="Hero">
+      <div class="hero__bg" role="img" aria-label="Seafood spread"></div>
+      <div class="hero__overlay" aria-hidden="true"></div>
+      <div class="hero__content">
+        <p class="hero__eyebrow">Fine Seafood · World Recipes</p>
+        <h1 class="hero__title">
+          La&nbsp;<em>Marée</em>
+        </h1>
+        <p class="hero__subtitle">
+          The world's most exquisite seafood recipes, curated by a three-star kitchen and brought to your table.
+        </p>
+        <div class="hero__cta">
+          <a href="#recipes" class="btn btn-primary">Explore Recipes</a>
+          <a href="#about" class="btn btn-outline">Meet Chef Bobba</a>
+        </div>
+      </div>
+      <div class="hero__scroll" aria-hidden="true">Scroll</div>
+    </section>
 
-    <script src="js/main.js"></script>
+    <!-- ═══════════════════════════════════════ RECIPES -->
+    <section id="recipes" class="recipes-section">
+      <div class="container">
+        <div class="recipes-section__header">
+          <div>
+            <p class="section-label">The Collection</p>
+            <div class="gold-rule"></div>
+            <h2 class="section-title">Chef's Signature Recipes</h2>
+          </div>
+          <button
+            class="btn btn-dark"
+            data-open-modal="add-recipe"
+            aria-label="Add a new recipe"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Recipe
+          </button>
+        </div>
+
+        <!-- Cards injected by recipe-grid.js -->
+        <div id="recipe-grid" class="recipe-grid" role="list" aria-label="Recipe collection"></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ ABOUT -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <div class="about__inner">
+
+          <!-- Text -->
+          <div class="about__text">
+            <p class="section-label">The Chef</p>
+            <div class="gold-rule"></div>
+            <h2 class="section-title">Chef Bobba</h2>
+
+            <blockquote class="about__quote">
+              "The sea is the most generous kitchen in the world. Every tide brings a new inspiration."
+            </blockquote>
+
+            <p class="about__bio">
+              Born on the wind-scoured coast of Normandy, France, Jean-Baptiste "Bobba" Delacroix grew up gutting mackerel before he could read. At sixteen he crossed the English Channel to stage at a two-star kitchen in London; at twenty-four he won his first Michelin star in Paris. Today, after three decades along the coasts of France, Japan, and Peru, he holds three stars and a lifelong obsession with one ingredient: the ocean.
+            </p>
+            <p class="about__bio">
+              This collection is his living library — the dishes he returns to every season, refined over thousands of services and shared, for the first time, without reservation.
+            </p>
+
+            <div class="about__credentials">
+              <div class="about__cred">
+                <strong>3</strong>
+                <span>Michelin Stars</span>
+              </div>
+              <div class="about__cred">
+                <strong>35+</strong>
+                <span>Years at Sea</span>
+              </div>
+              <div class="about__cred">
+                <strong>6</strong>
+                <span>Signature Recipes</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Image -->
+          <div class="about__image-wrap">
+            <img
+              class="about__image"
+              src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=600&q=85"
+              alt="Chef Bobba in his kitchen"
+              loading="lazy"
+            />
+            <div class="about__badge">
+              <strong>Chef Bobba</strong>
+              <span>Executive Chef · La Marée</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════ FOOTER -->
+    <footer style="background:var(--navy);padding:2.5rem 0;text-align:center;">
+      <div class="container">
+        <p style="font-family:var(--font-serif);font-size:1.4rem;color:var(--gold);font-weight:300;letter-spacing:0.1em;margin-bottom:0.5rem;">La Marée</p>
+        <p style="font-size:0.72rem;color:rgba(255,255,255,0.35);letter-spacing:0.12em;font-family:var(--font-sans);text-transform:uppercase;">Fine Seafood Recipes · A Chef Bobba Collection</p>
+      </div>
+    </footer>
+
+    <!-- ═══════════════════════════════════════ ADD RECIPE MODAL -->
+    <div id="add-recipe-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal">
+        <div class="modal__header">
+          <h2 class="modal__title" id="modal-title">Add Your Recipe</h2>
+          <button class="modal__close" aria-label="Close modal">&#x2715;</button>
+        </div>
+        <div class="modal__body">
+          <form id="add-recipe-form" novalidate>
+            <div class="form-grid">
+
+              <div class="form-group full">
+                <label for="f-title">Recipe Name *</label>
+                <input id="f-title" name="title" type="text" placeholder="e.g. Grilled Branzino" required />
+              </div>
+
+              <div class="form-group full">
+                <label for="f-subtitle">Subtitle / Style</label>
+                <input id="f-subtitle" name="subtitle" type="text" placeholder="e.g. Lemon Butter & Capers" />
+              </div>
+
+              <div class="form-group full">
+                <label for="f-description">Short Description *</label>
+                <input id="f-description" name="description" type="text" placeholder="One sentence that captures the dish" required />
+              </div>
+
+              <div class="form-group">
+                <label for="f-time">Cook Time *</label>
+                <input id="f-time" name="time" type="text" placeholder="e.g. 30 min" required />
+              </div>
+
+              <div class="form-group">
+                <label for="f-difficulty">Difficulty *</label>
+                <select id="f-difficulty" name="difficulty" required>
+                  <option value="">Select…</option>
+                  <option value="Easy">Easy</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Advanced">Advanced</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="f-serves">Serves *</label>
+                <input id="f-serves" name="serves" type="number" min="1" max="20" placeholder="e.g. 4" required />
+              </div>
+
+              <div class="form-group">
+                <label for="f-category">Category</label>
+                <input id="f-category" name="category" type="text" placeholder="e.g. Shellfish" />
+              </div>
+
+              <div class="form-group full">
+                <label for="f-image">Image URL</label>
+                <input id="f-image" name="image" type="url" placeholder="https://…" />
+                <p class="form-hint">Paste a direct link to a high-resolution photo (optional).</p>
+              </div>
+
+              <div class="form-group full">
+                <label for="f-ingredients">Ingredients *</label>
+                <textarea id="f-ingredients" name="ingredients" placeholder="One ingredient per line:&#10;500 g fresh lobster&#10;3 tbsp unsalted butter" required></textarea>
+              </div>
+
+              <div class="form-group full">
+                <label for="f-steps">Instructions *</label>
+                <textarea id="f-steps" name="steps" style="min-height:160px;" placeholder="One step per line:&#10;Preheat the oven to 220 °C.&#10;Season the lobster with fleur de sel." required></textarea>
+              </div>
+
+              <div class="form-group full">
+                <label for="f-chef-note">Chef's Note</label>
+                <textarea id="f-chef-note" name="chef_note" placeholder="Any tips or secrets…"></textarea>
+              </div>
+
+            </div><!-- /.form-grid -->
+
+            <div class="modal__footer">
+              <button type="button" class="modal__cancel">Cancel</button>
+              <button type="submit" class="btn btn-primary">Save Recipe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast notification -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- JS entry point (ES module) -->
+    <script type="module" src="/js/main.js"></script>
   </body>
 </html>

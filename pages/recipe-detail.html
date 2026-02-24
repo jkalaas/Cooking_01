@@ -3,31 +3,168 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Recipe – Cooking_01</title>
+    <title>Recipe — La Marée</title>
+    <meta name="description" content="Step-by-step recipe instructions from Chef Bobba." />
+
+    <!-- Styles -->
     <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/components/nav.css" />
+    <link rel="stylesheet" href="../styles/components/recipe-detail.css" />
+    <link rel="stylesheet" href="../styles/components/modal.css" />
   </head>
   <body>
+
+    <div id="nav-sentinel" style="position:absolute;top:0;height:1px;width:100%;pointer-events:none;"></div>
+
+    <!-- Header injected by JS -->
     <header id="site-header"></header>
 
-    <main>
-      <article id="recipe-detail">
-        <h1 id="recipe-title">Recipe Title</h1>
-        <p id="recipe-meta" class="recipe-meta">30 min · Easy · Serves 4</p>
-        <img id="recipe-image" src="" alt="" />
-        <section id="recipe-description">
-          <p>Recipe description goes here.</p>
-        </section>
-        <section id="recipe-ingredients">
-          <h2>Ingredients</h2>
-          <ul></ul>
-        </section>
-        <section id="recipe-steps">
-          <h2>Instructions</h2>
-          <ol></ol>
-        </section>
-      </article>
-    </main>
+    <!-- Main recipe detail area — populated by recipe-detail-view.js -->
+    <div id="recipe-detail">
 
-    <script src="../js/main.js"></script>
+      <!-- ── Hero ── -->
+      <div class="detail-hero">
+        <a href="/" class="back-link" aria-label="Back to all recipes">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          All Recipes
+        </a>
+        <img
+          id="detail-hero-image"
+          class="detail-hero__image"
+          src=""
+          alt=""
+        />
+        <div class="detail-hero__overlay" aria-hidden="true"></div>
+        <div class="detail-hero__content">
+          <span id="detail-hero-category" class="detail-hero__category"></span>
+          <h1 id="detail-hero-title" class="detail-hero__title"></h1>
+          <p id="detail-hero-subtitle" class="detail-hero__subtitle"></p>
+        </div>
+      </div>
+
+      <!-- ── Body ── -->
+      <div class="detail-body">
+        <div class="container">
+          <div class="detail-layout">
+
+            <!-- Sidebar: meta + ingredients -->
+            <aside class="detail-meta" aria-label="Recipe overview">
+              <h2 class="detail-meta__title">At a Glance</h2>
+
+              <div class="detail-meta__stats">
+                <div class="detail-meta__stat">
+                  <span class="detail-meta__stat-label">Time</span>
+                  <span id="meta-time" class="detail-meta__stat-value"></span>
+                </div>
+                <div class="detail-meta__stat">
+                  <span class="detail-meta__stat-label">Difficulty</span>
+                  <span id="meta-difficulty" class="detail-meta__stat-value"></span>
+                </div>
+                <div class="detail-meta__stat">
+                  <span class="detail-meta__stat-label">Serves</span>
+                  <span id="meta-serves" class="detail-meta__stat-value"></span>
+                </div>
+              </div>
+
+              <p class="section-label" style="margin-bottom:0.75rem;">Ingredients</p>
+              <ul id="ingredients-list" class="ingredients-list"></ul>
+            </aside>
+
+            <!-- Main: description + steps + chef note -->
+            <main class="detail-main" aria-label="Recipe instructions">
+              <p id="detail-description" class="detail-description"></p>
+
+              <p class="section-label" style="margin-bottom:1.25rem;">Method</p>
+              <ol id="steps-list" class="steps-list"></ol>
+
+              <div id="chef-note-section" class="chef-note" hidden>
+                <span class="chef-note__icon" aria-hidden="true">&#9733;</span>
+                <div>
+                  <p class="chef-note__label">Chef Bobba's Note</p>
+                  <p id="chef-note-text" class="chef-note__text"></p>
+                </div>
+              </div>
+            </main>
+
+          </div><!-- /.detail-layout -->
+        </div><!-- /.container -->
+      </div><!-- /.detail-body -->
+
+    </div><!-- /#recipe-detail -->
+
+    <!-- ═══════════════════════════════════════ ADD RECIPE MODAL -->
+    <div id="add-recipe-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal">
+        <div class="modal__header">
+          <h2 class="modal__title" id="modal-title">Add Your Recipe</h2>
+          <button class="modal__close" aria-label="Close modal">&#x2715;</button>
+        </div>
+        <div class="modal__body">
+          <form id="add-recipe-form" novalidate>
+            <div class="form-grid">
+              <div class="form-group full">
+                <label for="f-title">Recipe Name *</label>
+                <input id="f-title" name="title" type="text" placeholder="e.g. Grilled Branzino" required />
+              </div>
+              <div class="form-group full">
+                <label for="f-subtitle">Subtitle / Style</label>
+                <input id="f-subtitle" name="subtitle" type="text" placeholder="e.g. Lemon Butter &amp; Capers" />
+              </div>
+              <div class="form-group full">
+                <label for="f-description">Short Description *</label>
+                <input id="f-description" name="description" type="text" placeholder="One sentence that captures the dish" required />
+              </div>
+              <div class="form-group">
+                <label for="f-time">Cook Time *</label>
+                <input id="f-time" name="time" type="text" placeholder="e.g. 30 min" required />
+              </div>
+              <div class="form-group">
+                <label for="f-difficulty">Difficulty *</label>
+                <select id="f-difficulty" name="difficulty" required>
+                  <option value="">Select&hellip;</option>
+                  <option value="Easy">Easy</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Advanced">Advanced</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="f-serves">Serves *</label>
+                <input id="f-serves" name="serves" type="number" min="1" max="20" placeholder="e.g. 4" required />
+              </div>
+              <div class="form-group">
+                <label for="f-category">Category</label>
+                <input id="f-category" name="category" type="text" placeholder="e.g. Shellfish" />
+              </div>
+              <div class="form-group full">
+                <label for="f-image">Image URL</label>
+                <input id="f-image" name="image" type="url" placeholder="https://&hellip;" />
+                <p class="form-hint">Paste a direct link to a high-resolution photo (optional).</p>
+              </div>
+              <div class="form-group full">
+                <label for="f-ingredients">Ingredients *</label>
+                <textarea id="f-ingredients" name="ingredients" placeholder="One ingredient per line" required></textarea>
+              </div>
+              <div class="form-group full">
+                <label for="f-steps">Instructions *</label>
+                <textarea id="f-steps" name="steps" style="min-height:160px;" placeholder="One step per line" required></textarea>
+              </div>
+              <div class="form-group full">
+                <label for="f-chef-note">Chef's Note</label>
+                <textarea id="f-chef-note" name="chef_note" placeholder="Any tips or secrets&hellip;"></textarea>
+              </div>
+            </div>
+            <div class="modal__footer">
+              <button type="button" class="modal__cancel">Cancel</button>
+              <button type="submit" class="btn btn-primary">Save Recipe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- JS entry point (ES module) -->
+    <script type="module" src="../js/main.js"></script>
   </body>
 </html>

@@ -1,11 +1,29 @@
 <!-- components/header.html
-     Reusable site header and primary navigation.
-     Include/inject this snippet into each page's <header> element via JS or a build step.
+     Injected into every page's <header id="site-header"> by js/main.js.
 -->
-<nav class="site-nav">
-  <a class="site-nav__logo" href="/index.html">Cooking_01</a>
-  <ul class="site-nav__links">
-    <li><a href="/index.html">Home</a></li>
-    <li><a href="/pages/recipes.html">Recipes</a></li>
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+  <a class="site-nav__logo" href="/">
+    La Marée
+    <span>Fine Seafood Recipes</span>
+  </a>
+
+  <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <ul class="site-nav__links" role="list">
+    <li><a href="/#recipes">Recipes</a></li>
+    <li><a href="/#about">About Chef</a></li>
+    <li>
+      <a
+        href="#"
+        class="btn-add-recipe"
+        data-open-modal="add-recipe"
+        role="button"
+        aria-label="Add a new recipe"
+      >+ Add Recipe</a>
+    </li>
   </ul>
 </nav>
