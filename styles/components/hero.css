@@ -15,8 +15,7 @@
 .hero__bg {
   position: absolute;
   inset: 0;
-  /* SVG placeholder — run assets/images/download-images.sh to get the full photo */
-  background-image: url('../../assets/images/hero-background.svg');
+  background-image: url('https://images.unsplash.com/photo-1498654896293-37aacf113fd9?auto=format&fit=crop&w=1920&q=85');
   background-size: cover;
   background-position: center;
   transform: scale(1.04);

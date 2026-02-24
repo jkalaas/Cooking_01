@@ -60,13 +60,13 @@ function initMobileNav() {
   });
 }
 
-/* ── Hero background — local SVG first, Unsplash photo if available ── */
+/* ── Hero background ── */
 function initHeroBg() {
   const bg = document.querySelector('.hero__bg');
   if (!bg) return;
   requestAnimationFrame(() => bg.classList.add('loaded'));
 
-  /* Try to load the downloaded JPG; fall back to local SVG (already set in CSS) */
+  /* If the user has run download-images.sh, prefer the local JPG over the CDN URL */
   const probe = new Image();
   probe.onload = () => {
     bg.style.backgroundImage = "url('assets/images/hero-background.jpg')";

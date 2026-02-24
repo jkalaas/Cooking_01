@@ -30,12 +30,12 @@ function findRecipe(id) {
 }
 
 function renderDetail(r) {
-  /* Hero — try local image first, fall back to Unsplash */
+  /* Hero — Unsplash photo first, local SVG as offline fallback */
   const heroImg = document.getElementById('detail-hero-image');
-  const localSrc = `../assets/images/${r.id}.svg`;
-  const remoteSrc = (r.detailImage || r.image).replace(/&/g, '&amp;');
-  heroImg.onerror = () => { heroImg.onerror = null; heroImg.src = remoteSrc; };
-  heroImg.src = localSrc;
+  const remoteSrc = r.detailImage || r.image;
+  const localFallback = `../assets/images/${r.id}.svg`;
+  heroImg.onerror = () => { heroImg.onerror = null; heroImg.src = localFallback; };
+  heroImg.src = remoteSrc;
   document.getElementById('detail-hero-image').alt = r.title;
   document.getElementById('detail-hero-category').textContent = r.category;
   document.getElementById('detail-hero-title').textContent = r.title;
