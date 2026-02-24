@@ -9,7 +9,10 @@
  */
 
 document.addEventListener('DOMContentLoaded', async () => {
-  await loadComponent('#site-header', '/components/header.html');
+  /* Compute root path so this works from / and from /pages/ */
+  const inSubDir = window.location.pathname.includes('/pages/');
+  const root = inSubDir ? '../' : '';
+  await loadComponent('#site-header', root + 'components/header.html');
 
   initStickyNav();
   initMobileNav();
@@ -57,10 +60,16 @@ function initMobileNav() {
   });
 }
 
-/* ── Hero parallax bg ── */
+/* ── Hero background — local SVG first, Unsplash photo if available ── */
 function initHeroBg() {
   const bg = document.querySelector('.hero__bg');
   if (!bg) return;
-  /* Trigger the CSS loaded class for the Ken Burns effect */
   requestAnimationFrame(() => bg.classList.add('loaded'));
+
+  /* Try to load the downloaded JPG; fall back to local SVG (already set in CSS) */
+  const probe = new Image();
+  probe.onload = () => {
+    bg.style.backgroundImage = "url('assets/images/hero-background.jpg')";
+  };
+  probe.src = 'assets/images/hero-background.jpg';
 }

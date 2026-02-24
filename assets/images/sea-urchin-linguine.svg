@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%">
+      <stop offset="0%" stop-color="#17293d"/>
+      <stop offset="100%" stop-color="#0d1b2a"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect x="24" y="24" width="752" height="552" fill="none" stroke="#c9a55a" stroke-width="1" opacity="0.3"/>
+  <circle cx="400" cy="220" r="80" fill="none" stroke="#c9a55a" stroke-width="1" opacity="0.15"/>
+  <circle cx="400" cy="220" r="50" fill="none" stroke="#c9a55a" stroke-width="1" opacity="0.1"/>
+  <text x="400" y="340" text-anchor="middle" font-family="Georgia,serif" font-size="42" font-weight="300" fill="#ffffff">Sea Urchin Linguine</text>
+  <rect x="315" y="358" width="170" height="1" fill="#c9a55a"/>
+  <text x="400" y="388" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" fill="#c9a55a" letter-spacing="5">PASTA &amp; FISH</text>
+  <text x="400" y="570" text-anchor="middle" font-family="Georgia,serif" font-size="15" font-style="italic" fill="rgba(201,165,90,0.18)">La Marée</text>
+</svg>

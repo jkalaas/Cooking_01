@@ -13,14 +13,17 @@ function initRecipeGrid() {
 }
 
 function recipeCardHTML(recipe) {
-  const detailUrl = `/pages/recipe-detail.html?id=${recipe.id}`;
+  const detailUrl = `pages/recipe-detail.html?id=${recipe.id}`;
+  const localImg = `assets/images/${recipe.id}.svg`;
+  const fallback = recipe.image.replace(/&/g, '&amp;');
   return `
     <article class="recipe-card">
       <a class="recipe-card__link" href="${detailUrl}" aria-label="${recipe.title}">
         <div class="recipe-card__image-wrap">
           <img
             class="recipe-card__image"
-            src="${recipe.image}"
+            src="${localImg}"
+            onerror="this.onerror=null;this.src='${fallback}'"
             alt="${recipe.title}"
             loading="lazy"
           />
