@@ -4,18 +4,18 @@ This file provides guidance for AI assistants working in this repository.
 
 ## Project Overview
 
-**Cooking_01** is a website for cooking recipes. The project is in its initial setup phase — the tech stack and architecture have not yet been established. When making implementation decisions, prefer widely-adopted, maintainable options and document any choices made.
+**Cooking_01** is a website for cooking recipes built with vanilla HTML, CSS, and JavaScript — no framework or build step required. Open `index.html` in a browser (or serve the root with any static file server) to run it.
 
 ## Repository State
 
 | Aspect | Status |
 |---|---|
-| Source code | Not yet created |
-| Build system | Not configured |
+| Source code | Vanilla HTML / CSS / JS |
+| Build system | None (no build step) |
 | Test framework | Not configured |
 | Linting / formatting | Not configured |
 | CI/CD | Not configured |
-| Dependency management | Not configured |
+| Dependency management | None (no package manager) |
 
 When infrastructure is added, update the relevant sections below.
 
@@ -46,34 +46,28 @@ When infrastructure is added, update the relevant sections below.
 
 ## Tech Stack
 
-Not yet determined. When a stack is chosen, document it here. Common candidates for a recipe website:
+| Layer | Choice |
+|---|---|
+| Markup | HTML5 |
+| Styles | Plain CSS (custom properties, no preprocessor) |
+| Logic | Vanilla ES2020+ JavaScript (ES modules, `fetch`, `async/await`) |
+| Fonts / icons | Self-hosted (drop files into `assets/fonts/`) |
+| Backend / data | None yet — add a REST API or static JSON data as needed |
 
-- **Frontend**: React, Vue, or plain HTML/CSS/JS
-- **Backend**: Node.js (Express/Fastify), Python (FastAPI/Django/Flask), or a static site generator
-- **Database**: PostgreSQL, SQLite, or a headless CMS
-- **Styling**: Tailwind CSS, CSS Modules, or plain CSS
-
-Once a stack is decided, add setup instructions and any relevant commands below.
+**Serving locally**: Any static file server works, e.g.:
+```bash
+npx serve .         # Node.js (one-off, no install)
+python3 -m http.server 8080
+```
 
 ## Commands
 
-> Commands will be added here once the project is bootstrapped. Common commands to document:
-
 ```bash
-# Install dependencies
-# <command>
+# Serve the app locally (choose one)
+npx serve .
+python3 -m http.server 8080
 
-# Start development server
-# <command>
-
-# Run tests
-# <command>
-
-# Lint / format code
-# <command>
-
-# Build for production
-# <command>
+# No install, build, or test commands yet
 ```
 
 ## Testing
@@ -92,14 +86,38 @@ No style configuration exists yet. When linting/formatting tools are added, docu
 
 ## Project Structure
 
-To be defined as development begins. Update this section when a directory structure is established. Example placeholder:
-
 ```
 Cooking_01/
-├── CLAUDE.md          # AI assistant guidance (this file)
-├── README.md          # Project overview
-└── ...                # Source code to be added
+├── index.html                  # App entry point — links CSS & JS, mounts header
+├── assets/
+│   ├── images/                 # Recipe photos, icons, logo images
+│   └── fonts/                  # Custom/self-hosted font files (.woff2, .ttf)
+├── styles/
+│   ├── main.css                # Global styles: CSS variables, reset, typography, layout
+│   └── components/             # Per-component CSS files (e.g. recipe-card.css)
+├── components/
+│   ├── header.html             # Site header / navigation snippet
+│   └── recipe-card.html        # Reusable recipe card markup
+├── js/
+│   ├── main.js                 # App bootstrap — loads shared components on DOMContentLoaded
+│   └── components/             # Feature/component JS modules (e.g. recipe-grid.js)
+├── pages/
+│   ├── recipes.html            # Recipe listing page
+│   └── recipe-detail.html      # Single recipe detail page
+├── README.md                   # Project overview
+└── CLAUDE.md                   # AI assistant guidance (this file)
 ```
+
+### Folder purposes
+
+| Folder | Purpose |
+|---|---|
+| `assets/images/` | Static images — recipe photos, icons, logo. Referenced as `/assets/images/<file>` in HTML/CSS. |
+| `assets/fonts/` | Self-hosted fonts. Reference them with `@font-face` in `styles/main.css`. |
+| `styles/` | All CSS. `main.css` holds global rules and design tokens; add per-component files under `styles/components/`. |
+| `components/` | Reusable HTML snippets (header, cards, footer). Loaded into pages at runtime via `js/main.js → loadComponent()`. |
+| `js/` | JavaScript. `main.js` is the entry point; add feature modules under `js/components/`. |
+| `pages/` | Secondary HTML pages. Paths are relative from here (`../styles/`, `../js/`). |
 
 ## Key Conventions for AI Assistants
 

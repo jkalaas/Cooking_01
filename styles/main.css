@@ -1,0 +1,59 @@
+/* ============================================================
+   main.css — Global styles
+   - CSS custom properties (design tokens)
+   - Minimal reset
+   - Base typography
+   - Layout utilities
+   Import component stylesheets from styles/components/.
+   ============================================================ */
+
+/* --- Design tokens --- */
+:root {
+  --color-primary: #e07b39;
+  --color-bg: #fffdf9;
+  --color-text: #2c2c2c;
+  --color-muted: #6b6b6b;
+  --font-sans: system-ui, sans-serif;
+  --radius: 8px;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+}
+
+/* --- Reset --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Base --- */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* --- Layout --- */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--spacing-lg) var(--spacing-md);
+}
