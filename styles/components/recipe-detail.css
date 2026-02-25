@@ -259,6 +259,48 @@
   line-height: 1.8;
 }
 
+/* ═══ Recipe overlay (full-screen, same-page) ═══ */
+.recipe-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  overflow-y: auto;
+  background: var(--cream);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+}
+
+.recipe-overlay.is-open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.25s ease, visibility 0s linear 0s;
+}
+
+.overlay-close {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.5rem;
+  z-index: 210;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: rgba(13, 27, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.overlay-close:hover {
+  background: var(--gold);
+}
+
 /* Not found */
 .recipe-not-found {
   text-align: center;

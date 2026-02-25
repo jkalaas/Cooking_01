@@ -10,15 +10,21 @@ function initRecipeGrid() {
 
   const all = [...recipes, ...getStoredRecipes()];
   grid.innerHTML = all.map(recipeCardHTML).join('');
+
+  grid.addEventListener('click', function(e) {
+    var link = e.target.closest('[data-recipe-id]');
+    if (!link) return;
+    e.preventDefault();
+    openRecipeOverlay(link.dataset.recipeId);
+  });
 }
 
 function recipeCardHTML(recipe) {
-  const detailUrl = `pages/recipe-detail.html?id=${recipe.id}`;
   const primaryImg = recipe.image;
   const localFallback = `assets/images/${recipe.id}.svg`;
   return `
     <article class="recipe-card">
-      <a class="recipe-card__link" href="${detailUrl}" aria-label="${recipe.title}">
+      <a class="recipe-card__link" href="#" data-recipe-id="${recipe.id}" aria-label="${recipe.title}">
         <div class="recipe-card__image-wrap">
           <img
             class="recipe-card__image"

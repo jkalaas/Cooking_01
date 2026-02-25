@@ -21,6 +21,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   initRecipeGrid();
   initRecipeDetail();
   initAddRecipe();
+
+  /* Close recipe overlay on Escape or close button */
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeRecipeOverlay();
+  });
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('#overlay-close')) closeRecipeOverlay();
+  });
 });
 
 /* ── Component loader ── */

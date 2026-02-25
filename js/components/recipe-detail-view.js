@@ -95,3 +95,60 @@ function escHtml(str) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
 }
+
+/* ── Overlay (same-page recipe detail) ── */
+
+function openRecipeOverlay(id) {
+  var recipe = findRecipe(id);
+  if (!recipe) return;
+  renderOverlay(recipe);
+  var overlay = document.getElementById('recipe-overlay');
+  if (!overlay) return;
+  overlay.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+  var closeBtn = document.getElementById('overlay-close');
+  if (closeBtn) closeBtn.focus();
+}
+
+function closeRecipeOverlay() {
+  var overlay = document.getElementById('recipe-overlay');
+  if (!overlay) return;
+  overlay.classList.remove('is-open');
+  document.body.style.overflow = '';
+  overlay.scrollTop = 0;
+}
+
+function renderOverlay(r) {
+  var heroImg = document.getElementById('overlay-hero-image');
+  var remoteSrc = r.detailImage || r.image;
+  var localFallback = 'assets/images/' + r.id + '.svg';
+  heroImg.onerror = function() { heroImg.onerror = null; heroImg.src = localFallback; };
+  heroImg.src = remoteSrc;
+  heroImg.alt = r.title;
+
+  document.getElementById('overlay-hero-category').textContent = r.category;
+  document.getElementById('overlay-title').textContent = r.title;
+  document.getElementById('overlay-hero-subtitle').textContent = r.subtitle || '';
+
+  document.getElementById('overlay-meta-time').textContent = r.time;
+  document.getElementById('overlay-meta-difficulty').textContent = r.difficulty;
+  document.getElementById('overlay-meta-serves').textContent = r.serves;
+
+  var ingList = document.getElementById('overlay-ingredients-list');
+  ingList.innerHTML = r.ingredients.map(function(i) { return '<li>' + escHtml(i) + '</li>'; }).join('');
+
+  document.getElementById('overlay-description').textContent = r.description;
+
+  var stepsList = document.getElementById('overlay-steps-list');
+  stepsList.innerHTML = r.steps.map(function(s, i) {
+    return '<li class="step"><span class="step__number">' + String(i + 1).padStart(2, '0') + '</span><p class="step__text">' + escHtml(s) + '</p></li>';
+  }).join('');
+
+  var noteSection = document.getElementById('overlay-chef-note-section');
+  if (r.chefNote) {
+    document.getElementById('overlay-chef-note-text').textContent = r.chefNote;
+    noteSection.hidden = false;
+  } else {
+    noteSection.hidden = true;
+  }
+}
