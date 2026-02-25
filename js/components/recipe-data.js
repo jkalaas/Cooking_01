@@ -16,9 +16,9 @@ var recipes = [
     serves: 2,
     category: "Shellfish",
     image:
-      "https://images.unsplash.com/photo-1559742811-822873691df8?auto=format&fit=crop&w=800&q=85",
+      "https://images.unsplash.com/photo-BmjuEqM4YOY?auto=format&fit=crop&w=800&q=85",
     detailImage:
-      "https://images.unsplash.com/photo-1559742811-822873691df8?auto=format&fit=crop&w=1400&q=85",
+      "https://images.unsplash.com/photo-BmjuEqM4YOY?auto=format&fit=crop&w=1400&q=85",
     ingredients: [
       "1 whole live lobster (750 g / 1.5 lb)",
       "3 tbsp unsalted butter",
@@ -55,9 +55,9 @@ var recipes = [
     serves: 4,
     category: "Shellfish",
     image:
-      "https://images.unsplash.com/photo-1611599538835-b52a8c2f9080?auto=format&fit=crop&w=800&q=85",
+      "https://images.unsplash.com/photo-rkpEvqx43R4?auto=format&fit=crop&w=800&q=85",
     detailImage:
-      "https://images.unsplash.com/photo-1611599538835-b52a8c2f9080?auto=format&fit=crop&w=1400&q=85",
+      "https://images.unsplash.com/photo-rkpEvqx43R4?auto=format&fit=crop&w=1400&q=85",
     ingredients: [
       "8 large diver scallops, roe attached",
       "200 g cauliflower florets",
@@ -90,9 +90,9 @@ var recipes = [
     serves: 4,
     category: "Oysters",
     image:
-      "https://images.unsplash.com/photo-1617196034183-421b4040ed20?auto=format&fit=crop&w=800&q=85",
+      "https://images.unsplash.com/photo-IznNxa6MW4Q?auto=format&fit=crop&w=800&q=85",
     detailImage:
-      "https://images.unsplash.com/photo-1617196034183-421b4040ed20?auto=format&fit=crop&w=1400&q=85",
+      "https://images.unsplash.com/photo-IznNxa6MW4Q?auto=format&fit=crop&w=1400&q=85",
     ingredients: [
       "12 fresh oysters, shucked on the half-shell",
       "200 g fresh spinach, blanched and squeezed dry",
